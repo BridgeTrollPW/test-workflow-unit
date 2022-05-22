@@ -29,6 +29,6 @@ jobs:
         run: |
           curl -X POST -vvv \
           -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           --data '{"event_type": "index-packages"}' \
           https://api.github.com/repos/BridgeTrollPW/test-workflow-receiver/dispatches
