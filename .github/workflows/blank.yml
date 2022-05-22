@@ -13,7 +13,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     permissions:
-      contents: write
+      contents: read|write
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -31,6 +31,6 @@ jobs:
         run: |
           curl -X POST -vvv \
           -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           --data '{"event_type": "index-packages"}' \
           https://api.github.com/repos/BridgeTrollPW/test-workflow-receiver/dispatches
