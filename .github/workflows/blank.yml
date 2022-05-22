@@ -4,21 +4,22 @@ on:
 
 jobs:
   build:
-    permissions: write-all
+    permissions: 
+      metadata:read
+      contents:read&write
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      #- uses: actions/checkout@v3
-      #- name: Run a multi-line script
-      #  run: |
-      #    curl -X POST -vvv \
-      #    -H "Accept: application/vnd.github.v3+json" \
-      #    -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-      #    --data '{"event_type": "index-packages"}' \
-      #    https://api.github.com/repos/BridgeTrollPW/test-workflow-receiver/dispatches
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v2.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: BridgeTrollPW/test-workflow-receiver
-          event-type: index-packages
+      - uses: actions/checkout@v3
+      - name: Run a multi-line script
+        run: |
+          curl -X POST -vvv \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          --data '{"event_type": "index-packages"}' \
+          https://api.github.com/repos/BridgeTrollPW/test-workflow-receiver/dispatches
+      #- name: Repository Dispatch
+      #  uses: peter-evans/repository-dispatch@v2.0.0
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    repository: BridgeTrollPW/test-workflow-receiver
+      #    event-type: index-packages
